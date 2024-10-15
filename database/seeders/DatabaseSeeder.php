@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'adminflashlight@mail.com',
             'password' => bcrypt('123123123'),
         ]);
+
+        $this->call(ProductSeeder::class);
     }
 }

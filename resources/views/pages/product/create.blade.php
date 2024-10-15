@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Product')
+@section('title', 'Create User')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -26,19 +26,17 @@
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                    <div class="breadcrumb-item">Create User</div>
+                    <div class="breadcrumb-item">Create Product</div>
                 </div>
             </div>
 
             <div class="section-body">
-                {{-- <h2 class="section-title">Create User</h2>
-                <p class="section-lead">Create New User</p> --}}
                 <div class="card">
                     <div class="card-header">
                         <h4>Input Text</h4>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('user.store')}}" method="POST">
+                        <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -55,121 +53,88 @@
                                     @enderror
                             </div>
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input id="email"
-                                    type="email"
-                                    class="form-control @error('email')
-                                        is-invalid
-                                    @enderror"
-                                    name="email">
-                                    @error('email')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label>Phone Number</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-phone"></i>
-                                        </div>
-                                    </div>
-                                    <input id="phone_number"
+                                <label for="description">Description</label>
+                                <input id="description"
                                     type="text"
-                                    class="form-control @error('phone_number')
+                                    class="form-control @error('description')
                                         is-invalid
                                     @enderror"
-                                    name="phone_number">
-                                    @error('phone_number')
+                                    name="description">
+                                    @error('description')
                                     <div class="invalid-feedback">
                                         {{$message}}
                                     </div>
                                     @enderror
-                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label>Password</label>
+                                <label>Price</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
-                                            <i class="fas fa-lock"></i>
+                                            Rp.
                                         </div>
                                     </div>
-                                    <input id="password"
-                                    type="password"
-                                    class="form-control pwstrength @error('password')
+                                    <input id="price"
+                                        type="text"
+                                        class="form-control @error('price') is-invalid @enderror"
+                                        name="price">
+                                    @error('price')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <input id="category"
+                                    type="text"
+                                    class="form-control @error('category')
                                         is-invalid
                                     @enderror"
-                                    data-indicator="pwindicator"
-                                    name="password">
-                                    @error('password')
+                                    name="category">
+                                    @error('category')
                                     <div class="invalid-feedback">
                                         {{$message}}
                                     </div>
                                     @enderror
-                                <div id="pwindicator"
-                                    class="pwindicator">
-                                    <div class="bar"></div>
-                                    <div class="label"></div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group" style="margin-top: 20px">
-                                <label for="password_confirmation" class="d-block">Password Confirmation</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">
-                                            <i class="fas fa-lock"></i>
-                                        </div>
-                                    </div>
-                                    <input id="password_confirmation"
-                                        type="password"
-                                        class="form-control @error('password_confirmation') is-invalid @enderror"
-                                        name="password_confirmation">
-                                    @error('password_confirmation')
-                                    <div class="invalid-feedback">
-                                        {{$message}}
-                                    </div>
-                                    @enderror
-                                </div>
                             </div>
 
                             <div class="form-group" style="margin-top: 20px">
-                                <label>Role</label>
-                                <select id="role"
-                                    class="form-control selectric @error('role') is-invalid @enderror"
-                                    name="role">
-                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                    <option value="staff" {{ old('role') == 'staff' ? 'selected' : '' }}>Staff</option>
-                                    <option value="customer" {{ old('role') == 'customer' ? 'selected' : '' }}>Customer</option>
+                                <label>Category</label>
+                                <select id="category"
+                                    class="form-control selectric @error('category') is-invalid @enderror"
+                                    name="category">
+                                    <option value="motobike" {{ old('category') == 'motobike' ? 'selected' : '' }}>Clean Motobike</option>
+                                    <option value="helmet" {{ old('category') == 'helmet' ? 'selected' : '' }}>Clean Helmet</option>
+                                    <option value="apparel" {{ old('category') == 'apparel' ? 'selected' : '' }}>Clean Apparels</option>
+                                    <option value="fnb" {{ old('category') == 'fnb' ? 'selected' : '' }}>Food and Beverages</option>
+                                    <option value="additional" {{ old('category') == 'additional' ? 'selected' : '' }}>Additional</option>
                                 </select>
-                                @error('role')
+                                @error('category')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
                                 @enderror
                             </div>
 
-
                             <div class="form-group">
-                                <label>Customer Type</label>
-                                <select id="is_member"
-                                    class="form-control selectric @error('is_member') is-invalid @enderror"
-                                    name="is_member">
-                                    <option value="0" {{ old('is_member') == 0 ? 'selected' : '' }}>Regular</option>
-                                    <option value="1" {{ old('is_member') == 1 ? 'selected' : '' }}>Member</option>
-                                </select>
-                                @error('is_member')
-                                <div class="invalid-feedback">
-                                    {{$message}}
+                                <label>Photo Product</label>
+                                <div class="col-sm-9">
+                                 <input type="file" class="form-control" name="images" @error('images')
+                                     is-invalid
+                                 @enderror>
                                 </div>
+                                @error('images')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
                                 @enderror
                             </div>
+
                     </div>
                     <div class="card-footer text-right">
                         <button class="btn btn-primary">
